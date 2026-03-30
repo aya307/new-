@@ -1,13 +1,25 @@
+require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+const cors = require('cors');
+const connectDB = require('./connectDB');
 
 const app = express();
+
+// Middleware
+app.use(cors());
 app.use(express.json());
 
+// Connexion MongoDB
+connectDB();
 
-const MONGO_URI = 'mongodb+srv://znatniaya1234_db_user:<GunF029axfPimc25>@cluster.mrdahp3.mongodb.net/?appName=Cluster'
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('MongoDB connecté ✅'))
-  .catch(err => console.log('Erreur :', err));
+// Routes
+app.get('/', (req, res) => {
+  res.json({ message: 'Serveur fonctionne ✅' });
+});
 
-app.listen(3000, () => console.log('Serveur sur http://localhost:3000'));
+// app.use('/api/users', require('./routes/userRoutes'));  ← ajoute tes routes ici
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Serveur lancé sur http://localhost:${PORT} 🚀`);
+});
