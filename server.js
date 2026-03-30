@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(express.json());
 
-// Connexion MongoDB
-mongoose.connect('mongodb://localhost:27017/ma-base')
+
+const MONGO_URI = 'mongodb+srv://znatniaya1234_db_user:<GunF029axfPimc25>@cluster.mrdahp3.mongodb.net/?appName=Cluster'
+mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB connecté ✅'))
   .catch(err => console.log('Erreur :', err));
 
